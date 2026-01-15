@@ -1,15 +1,15 @@
 <p align="center">
-    <a href="https://omegamvc.github.io" target="_blank">
-        <img src="https://github.com/omegamvc/omega-assets/blob/main/images/logo-omega.png" alt="Omega Logo">
+    <a href="https://omega-mvc.github.io" target="_blank">
+        <img src="https://github.com/omega-mvc/omega-assets/blob/main/images/logo-omega.png" alt="Omega Logo">
     </a>
 </p>
 
 <p align="center">
-    <a href="https://omegamvc.github.io">Documentation</a> |
-    <a href="https://github.com/omegamvc/omegamvc.github.io/blob/main/README.md#changelog">Changelog</a> |
-    <a href="https://github.com/omegamvc/omega/blob/main/CONTRIBUTING.md">Contributing</a> |
-    <a href="https://github.com/omegamvc/omega/blob/main/CODE_OF_CONDUCT.md">Code Of Conduct</a> |
-    <a href="https://github.com/omegamvc/omega/blob/main/LICENSE">License</a>
+    <a href="https://omega-mvc.github.io">Documentation</a> |
+    <a href="https://github.com/omega-mvc/omega-mvc.github.io/blob/main/README.md#changelog">Changelog</a> |
+    <a href="https://github.com/omega-mvc/omega/blob/main/CONTRIBUTING.md">Contributing</a> |
+    <a href="https://github.com/omega-mvc/omega/blob/main/CODE_OF_CONDUCT.md">Code Of Conduct</a> |
+    <a href="https://github.com/omega-mvc/omega/blob/main/LICENSE">License</a>
 </p>
 
 # Omega Starter Application
@@ -29,7 +29,7 @@ Welcome to **omega**, a minimal MVC framework designed to streamline your PHP de
 
 ### 1 Create Your Project
 ```bash
-composer create-project omegamvc/omega project-name
+composer create-project omega-mvc/omega project-name
 ```
 
 ### 2️ Jump In
@@ -92,7 +92,7 @@ Add your logic:
 public function handle(MyPDO $pdo): Response
 {
     return view('profile', [
-        'name' => Profile::find('omegamvc', $pdo)->real_name
+        'name' => Profile::find('omega-mvc', $pdo)->real_name
     ]);
 }
 ```
@@ -137,7 +137,7 @@ php omega make:services Profile
 public function index(MyPDO $pdo): array
 {
     $data = Cache::remember('profile', 3600, fn () => [
-        'name'   => Profile::find('omegamvc', $pdo)->real_name,
+        'name'   => Profile::find('omega-mvc', $pdo)->real_name,
         'status' => 200,
     ]);
 
@@ -166,14 +166,14 @@ Route::get('/api/v1/profile', [ProfileServices::class, 'index'])
 Ready for production? Cache everything:
 
 ```bash
-php omegamvc view:cache    # Cache compiled templates
-php omegamvc config:cache  # Cache configuration
-php omegamvc route:cache   # Cache all routes
+php omega-mvc view:cache    # Cache compiled templates
+php omega-mvc config:cache  # Cache configuration
+php omega-mvc route:cache   # Cache all routes
 ```
 
 ## Official Documentation
 
-The official documentation for Omega is available [here](https://omegamvc.github.io)
+The official documentation for Omega is available [here](https://omega-mvc.github.io)
 
 ## Contributing
 

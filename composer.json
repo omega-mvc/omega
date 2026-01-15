@@ -1,9 +1,9 @@
 {
-    "name": "omegamvc/omega",
+    "name": "omega-mvc/omega",
     "type": "project",
     "version": "2.0.0",
     "description": "Omega is a lightweight PHP framework designed for building modern web applications using the MVC architecture. Compatible with PHP 8.2+.",
-    "homepage": "https://omegamvc.github.io",
+    "homepage": "https://omega-mvc.github.io",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -33,7 +33,7 @@
         "ext-posix": "*",
         "ext-readline": "*",
         "ext-simplexml": "*",
-        "omegamvc/framework": "2.0.0"
+        "omega-mvc/framework": "2.0.0"
     },
     "require-dev": {
         "filp/whoops": "^2.18",

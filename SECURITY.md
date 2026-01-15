@@ -10,9 +10,9 @@ If you discover any security issues or vulnerabilities, please report them to us
 
 To report a security issue, you can use any of the following methods:
 
-1. **Email:** Send an email to [omegamvc](mailto:agisoftt@gmail.com). Please provide a detailed description of the vulnerability.
+1. **Email:** Send an email to [omega-mvc](mailto:agisoftt@gmail.com). Please provide a detailed description of the vulnerability.
 
-2. **GitHub Security Advisories:** If you prefer, you can use GitHub's security advisory features. Create a new security advisory directly on the [Security tab](https://github.com/omegamvc/omega/security) of this repository.
+2. **GitHub Security Advisories:** If you prefer, you can use GitHub's security advisory features. Create a new security advisory directly on the [Security tab](https://github.com/omega-mvc/omega/security) of this repository.
 
 3. **Pull Request:** You can submit a Pull Request addressing the security issue. Ensure your Pull Request includes a clear description of the problem and the solution. We appreciate your collaboration in directly contributing to the security of the project.
 

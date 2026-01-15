@@ -1,7 +1,7 @@
 {
     "name": "omega",
     "description": "",
-    "author": "omegamvc",
+    "author": "omega-mvc",
     "private": true,
     "type": "module",
     "scripts": {
