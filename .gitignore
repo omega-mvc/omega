@@ -1,0 +1,37 @@
+# Environment
+.env
+note.txt
+
+# Cache
+.php-cs-fixer.cache
+.phpunit.result.cache
+/.phpunit.cache
+
+# Build output
+/public/build
+/public/hot
+
+# Dependencies
+/vendor
+/node_modules
+
+# Lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+composer.lock
+phpcs.xml
+phpunit.xml
+phpstan.neon
+
+# Visual Studio Code configs
+/.vscode
+
+# JetBrains IDEs
+/.idea
+
+# Logs
+npm-debug.log
+yarn-error.log
+/docs/
+/REFACTORING_NOTES.md

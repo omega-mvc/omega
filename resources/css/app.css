@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+@source '../../storage/app/view/*.php';
+@source '../**/*.template.php';
+@source '../**/*.js';
+@source '../**/*.vue';
