@@ -44,12 +44,12 @@ class RouteServiceProvider extends AbstractServiceProvider
                 AppMiddleware::class,
             ])->group(
                 fn () => [
-                    require_once get_path('path.base', '/routes/web.php'),
-                    require_once get_path('path.base', '/routes/api.php'),
+                    require_once get_path('path.base', 'routes/web.php'),
+                    require_once get_path('path.base', 'routes/api.php'),
                 ]
             );
         }
 
-        require_once get_path('path.base', '/routes/schedule.php');
+        require_once get_path('path.base', 'routes/schedule.php');
     }
 }
