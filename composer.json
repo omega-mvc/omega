@@ -42,7 +42,9 @@
         "ext-posix": "*",
         "ext-readline": "*",
         "ext-simplexml": "*",
-        "omega-mvc/framework": "2.0.0"
+        "omega-mvc/framework": "2.0.0",
+        "ext-memcached": "*",
+        "ext-redis": "*"
     },
     "require-dev": {
         "filp/whoops": "^2.18",
