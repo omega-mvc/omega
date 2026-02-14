@@ -3,15 +3,6 @@
     "type": "project",
     "version": "2.0.0",
     "description": "Omega is a lightweight PHP framework designed for building modern web applications using the MVC architecture. Compatible with PHP 8.2+.",
-    "keywords": [
-    	"php",
-    	"demo",
-    	"mvc",
-    	"web-application",
-    	"starter-project",
-    	"php8",
-    	"example-app"
-    ],
     "homepage": "https://omega-mvc.github.io",
     "license": "GPL-3.0",
     "authors": [
@@ -22,7 +13,6 @@
         }
     ],
     "keywords": [
-        "PHP",
         "framework",
         "MVC",
         "PHP 8.4",
@@ -32,8 +22,6 @@
     ],
     "require": {
         "php": "^8.4",
-        "ext-apcu": "*",
-        "ext-http": "*",
         "ext-iconv": "*",
         "ext-mbstring": "*",
         "ext-openssl": "*",
@@ -42,9 +30,7 @@
         "ext-posix": "*",
         "ext-readline": "*",
         "ext-simplexml": "*",
-        "omega-mvc/framework": "2.0.0",
-        "ext-memcached": "*",
-        "ext-redis": "*"
+        "omega-mvc/framework": "^2.0.0"
     },
     "require-dev": {
         "filp/whoops": "^2.18",
@@ -63,18 +49,23 @@
         }
     },
     "scripts": {
-        "test:types": "phpstan analyse --ansi --memory-limit=-1",
-        "test:unit": "phpunit --testdox",
-        "test": [
-            "@test:types",
-            "@test:unit"
-        ],
+        "test": "vendor/bin/phpunit tests",
+        "phpcs": "vendor/bin/phpcs --standard=PSR12 app/",
+        "lint": "composer run phpcs",
+        "phpcbf": "vendor/bin/phpcbf --standard=PSR12 app/",
+        "fix": "composer run phpcbf",
+        "check": "composer run lint && composer run test",
+        "ci": "composer run fix && composer run check",
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
     },
     "suggest": {
-		"ext-apache": "If you want to use apache extension"
+		"ext-apache": "If you want to use apache extension",
+        "ext-apcu": "If you want to use APCu for faster in-memory caching",
+        "ext-memcached": "If you want to use Memcached as a cache backend",
+        "ext-redis": "If you want to use Redis as a cache backend or for session storage",
+        "ext-http": "If you want to use HTTP extension features"
     },
     "config": {
         "optimize-autoloader": true,
