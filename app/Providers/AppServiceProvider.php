@@ -40,7 +40,7 @@ class AppServiceProvider extends AbstractServiceProvider
 
         // register schedule to container
         $this->app->set('cron.log', fn (): Log => new Log());
-        $this->app->set('schedule', fn (): Schedule => new Schedule(now()->timestamp, $this->app['cron.log']));
+        $this->app->set('schedule', fn (): Schedule => new Schedule(now()->getTimestamp(), $this->app['cron.log']));
 
         // hash
         $this->registerHash();
