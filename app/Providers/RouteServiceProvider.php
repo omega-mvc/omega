@@ -8,8 +8,8 @@ use App\Middlewares\AppMiddleware;
 use Omega\Container\Exceptions\BindingResolutionException;
 use Omega\Container\Exceptions\CircularAliasException;
 use Omega\Container\Exceptions\EntryNotFoundException;
-use Omega\Container\Provider\AbstractServiceProvider;
 use Omega\Router\Router;
+use Omega\Support\AbstractServiceProvider;
 use ReflectionException;
 
 use function file_exists;

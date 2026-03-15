@@ -7,12 +7,12 @@ namespace App\Providers;
 use Omega\Container\Exceptions\BindingResolutionException;
 use Omega\Container\Exceptions\CircularAliasException;
 use Omega\Container\Exceptions\EntryNotFoundException;
-use Omega\Container\Provider\AbstractServiceProvider;
 use Omega\Database\Connection;
 use Omega\Database\DatabaseManager;
 use Omega\Database\Query\Query;
 use Omega\Database\Schema\Schema;
 use Omega\Database\Schema\SchemaConnection;
+use Omega\Support\AbstractServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
 use ReflectionException;
 
