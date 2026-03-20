@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use function Omega\Support\env;
+
 return [
     'db' => [
         'default'     => env('DB_CONNECTION', 'mysql'),

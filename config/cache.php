@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use function Omega\Support\env;
+use function Omega\Support\get_path;
+
 return [
     'cache' => [
         'default' => env('CACHE_STORAGE', 'file'),

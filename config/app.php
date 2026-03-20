@@ -9,6 +9,8 @@ use App\Providers\ViewServiceProvider;
 use Omega\Cache\CacheServiceProvider;
 use Omega\RateLimiter\RateLimiterServiceProvider;
 
+use function Omega\Support\env;
+
 return [
     'name'        => env('APP_NAME', ''),
     'version'     => env('APP_VERSION', ''),

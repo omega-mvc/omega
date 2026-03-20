@@ -18,6 +18,7 @@ use ReflectionException;
 
 use function array_merge;
 use function file_exists;
+use function Omega\Support\get_path;
 
 class ViewServiceProvider extends AbstractServiceProvider
 {

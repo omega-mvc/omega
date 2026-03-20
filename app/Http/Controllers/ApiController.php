@@ -13,6 +13,8 @@ use ReflectionException;
 use function array_key_exists;
 use function file_exists;
 use function method_exists;
+use function Omega\Support\app;
+use function Omega\Support\get_path;
 use function str_replace;
 
 class ApiController extends AbstractController
