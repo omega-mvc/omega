@@ -18,6 +18,7 @@ use Omega\Application\Application;
 use Omega\Container\Exceptions\BindingResolutionException;
 use Omega\Container\Exceptions\EntryNotFoundException;
 use Omega\Http\Http;
+use Omega\Http\Request;
 use Omega\Router\RouteDispatcher;
 use Omega\Router\Router;
 use Psr\Container\ContainerExceptionInterface;

@@ -1,13 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-use Omega\Console\Console;
+use Omega\Console\ConsoleApplication;
 
 require_once './vendor/autoload.php';
 
 $app = require_once __DIR__ . '/bootstrap/app.php';
 
-$out = $app->make(Console::class);
+$out = $app->make(ConsoleApplication::class);
 
 $handle = $out->handle($argv);
 
