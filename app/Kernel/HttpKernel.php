@@ -72,7 +72,7 @@ class HttpKernel extends Http
             if ($this->app->isDebugMode() && class_exists(Run::class)) {
                 /* @var PrettyPageHandler $hanlder */
                 $handler = $this->app->make('error.PrettyPageHandler');
-                $handler->setPageTitle('php mvc');
+                $handler->setPageTitle('Omega Framework');
 
                 /* @var Run $run */
                 $run = $this->app->make('error.handle');
