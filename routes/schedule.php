@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Omega\Support\Facades\Schedule;
+use Omega\Cron\Facade\Schedule;
 
 Schedule::call(static function () {
     return [

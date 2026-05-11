@@ -6,9 +6,9 @@ use App\Kernel\ConsoleKernel;
 use App\Kernel\HttpKernel;
 use Omega\Application\Application;
 use Omega\Console\ConsoleApplication;
+use Omega\Environment\Env;
 use Omega\Exceptions\ExceptionHandler;
 use Omega\Http\Http;
-use Omega\Support\Env;
 
 Env::load(dirname(__DIR__));
 

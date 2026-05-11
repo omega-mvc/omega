@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use function Omega\Support\env;
-use function Omega\Support\get_path;
+use function Omega\Environment\env;
+use function Omega\Application\get_path;
 
 return [
     'cache' => [

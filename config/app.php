@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use function Omega\Support\env;
+use function Omega\Environment\env;
 
 return [
     'name'        => env('APP_NAME', ''),

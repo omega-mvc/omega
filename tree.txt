@@ -1,0 +1,490 @@
+Omega
+├── Application
+│   ├── AbstractApplication.php
+│   ├── Application.php
+│   ├── ApplicationInterface.php
+│   ├── ApplicationManifest.php
+│   └── Bootstrapper
+│       ├── BootProviders.php
+│       └── RegisterProviders.php
+├── Archive
+│   ├── AbstractAdapter.php
+│   ├── AdapterInterface.php
+│   ├── Bz2Adapter.php
+│   ├── Exception
+│   │   └── PharRenameException.php
+│   ├── PharAdapter.php
+│   └── ZipAdapter.php
+├── Cache
+│   ├── AbstractCache.php
+│   ├── CacheInterface.php
+│   ├── CacheManager.php
+│   ├── CacheServiceProvider.php
+│   ├── Exceptions
+│   │   ├── CacheConfigurationException.php
+│   │   ├── CachePathException.php
+│   │   ├── InvalidValueIncrementException.php
+│   │   └── UnknownStorageException.php
+│   ├── Facade
+│   │   └── Cache.php
+│   ├── Storage
+│   │   ├── File.php
+│   │   ├── Memory.php
+│   │   └── StorageInterface.php
+│   └── Traits
+│       └── CacheTimeTrait.php
+├── Collection
+│   ├── AbstractCollectionImmutable.php
+│   ├── Collection.php
+│   ├── CollectionImmutable.php
+│   ├── CollectionInterface.php
+│   ├── Exceptions
+│   │   └── ImmutableCollectionException.php
+│   └── helper.php
+├── Config
+│   ├── AbstractConfigRepository.php
+│   ├── Bootstrapper
+│   │   └── ConfigBootstrapper.php
+│   ├── ConfigBuilder.php
+│   ├── ConfigRepository.php
+│   ├── ConfigRepositoryInterface.php
+│   ├── ConfigTrait.php
+│   ├── Exceptions
+│   │   ├── ConfigExceptionInterface.php
+│   │   ├── FileReadException.php
+│   │   ├── InvalidArrayConfigException.php
+│   │   ├── MalformedJsonException.php
+│   │   └── MalformedXmlException.php
+│   ├── Facade
+│   │   └── Config.php
+│   ├── MergeStrategy.php
+│   └── Source
+│       ├── AbstractSource.php
+│       ├── ArrayConfig.php
+│       ├── JsonConfig.php
+│       ├── SourceInterface.php
+│       └── XmlConfig.php
+├── Console
+│   ├── AbstractCommand.php
+│   ├── Attribute
+│   │   ├── AsCommand.php
+│   │   └── Make.php
+│   ├── CommandLoader.php
+│   ├── Commands
+│   │   ├── AbstractMakeCommand.php
+│   │   ├── AbstractMigration.php
+│   │   ├── CacheClearCommand.php
+│   │   ├── CommandClearCommand.php
+│   │   ├── CommandMapCommand.php
+│   │   ├── ConfigCacheCommand.php
+│   │   ├── ConfigClearCommand.php
+│   │   ├── CronCommand.php
+│   │   ├── CronListCommand.php
+│   │   ├── CronWorkCommand.php
+│   │   ├── DatabaseCreateCommand.php
+│   │   ├── DatabaseShowCommand.php
+│   │   ├── DatabaseWipeCommand.php
+│   │   ├── MaintenanceDownCommand.php
+│   │   ├── MaintenanceUpCommand.php
+│   │   ├── MakeCommand.php
+│   │   ├── MakeControllerCommand.php
+│   │   ├── MakeExceptionCommand.php
+│   │   ├── MakeMiddlewareCommand.php
+│   │   ├── MakeMigrationCommand.php
+│   │   ├── MakeModelCommand.php
+│   │   ├── MakeProviderCommand.php
+│   │   ├── MakeSeedCommand.php
+│   │   ├── MakeViewCommand.php
+│   │   ├── MigrateFreshCommand.php
+│   │   ├── MigrateInitCommand.php
+│   │   ├── MigrateRefreshCommand.php
+│   │   ├── MigrateResetCommand.php
+│   │   ├── MigrateRollbackCommand.php
+│   │   ├── MigrateRunCommand.php
+│   │   ├── MigrateStatusCommand.php
+│   │   ├── PackageDiscoverCommand.php
+│   │   ├── RouteCacheCommand.php
+│   │   ├── RouteClearCommand.php
+│   │   ├── RouteListCommand.php
+│   │   ├── SeedCommand.php
+│   │   ├── ServeCommand.php
+│   │   ├── VendorPublishCommand.php
+│   │   ├── ViewCacheCommand.php
+│   │   ├── ViewClearCommand.php
+│   │   └── ViewWatchCommand.php
+│   ├── ConsoleApplication.php
+│   ├── ConsoleBranding.php
+│   ├── Exceptions
+│   │   └── InvalidArgumentException.php
+│   ├── Style.php
+│   ├── Traits
+│   │   ├── InteractWithFilesystemTrait.php
+│   │   └── InteractsWithConsoleOutputTrait.php
+│   └── stubs
+│       ├── command.stub
+│       ├── controller.stub
+│       ├── down.stub
+│       ├── exception.stub
+│       ├── maintenance.stub
+│       ├── middleware.stub
+│       ├── migration.stub
+│       ├── migration_update.stub
+│       ├── provider.stub
+│       └── view.stub
+├── Container
+│   ├── AbstractServiceProvider.php
+│   ├── Attribute
+│   │   └── Inject.php
+│   ├── Container.php
+│   ├── ContainerInterface.php
+│   ├── Exceptions
+│   │   ├── AliasException.php
+│   │   ├── BindingResolutionException.php
+│   │   ├── CircularAliasException.php
+│   │   ├── ContainerException.php
+│   │   └── EntryNotFoundException.php
+│   ├── Injector.php
+│   ├── Invoker.php
+│   ├── ReflectionCache.php
+│   └── Resolver.php
+├── Cron
+│   ├── CronServiceProvider.php
+│   ├── Facade
+│   │   └── Schedule.php
+│   ├── InterpolateInterface.php
+│   ├── Log.php
+│   ├── Schedule.php
+│   └── ScheduleTime.php
+├── Csrf
+│   ├── AbstractCsrf.php
+│   ├── Csrf.php
+│   ├── CsrfInterface.php
+│   ├── Exception
+│   │   ├── CsrfInvalidTokenException.php
+│   │   ├── CsrfMalformedTokenException.php
+│   │   └── CsrfTokenExceptionInterface.php
+│   └── ServiceProvider
+│       └── CsrfServiceProvider.php
+├── Database
+│   ├── AbstractConnection.php
+│   ├── ConnectionFactory.php
+│   ├── ConnectionInterface.php
+│   ├── DatabaseManager.php
+│   ├── DatabaseServiceProvider.php
+│   ├── Exceptions
+│   │   └── InvalidConfigurationException.php
+│   ├── Facades
+│   │   ├── DB.php
+│   │   ├── PDO.php
+│   │   └── Schema.php
+│   ├── LoggerInterface.php
+│   ├── MariadbConnection.php
+│   ├── Model
+│   │   ├── Model.php
+│   │   └── ModelCollection.php
+│   ├── MysqlConnection.php
+│   ├── PgsqlConnection.php
+│   ├── Query
+│   │   ├── AbstractExecute.php
+│   │   ├── AbstractFetch.php
+│   │   ├── AbstractQuery.php
+│   │   ├── Bind.php
+│   │   ├── Delete.php
+│   │   ├── InnerQuery.php
+│   │   ├── Insert.php
+│   │   ├── Join
+│   │   │   ├── AbstractJoin.php
+│   │   │   ├── CrossJoin.php
+│   │   │   ├── FullJoin.php
+│   │   │   ├── InnerJoin.php
+│   │   │   ├── LeftJoin.php
+│   │   │   └── RightJoin.php
+│   │   ├── Query.php
+│   │   ├── Replace.php
+│   │   ├── Select.php
+│   │   ├── Table.php
+│   │   ├── Traits
+│   │   │   ├── ConditionTrait.php
+│   │   │   └── SubQueryTrait.php
+│   │   ├── Update.php
+│   │   └── Where.php
+│   ├── Schema
+│   │   ├── Create.php
+│   │   ├── DB
+│   │   │   ├── Create.php
+│   │   │   └── Drop.php
+│   │   ├── Drop.php
+│   │   ├── Query.php
+│   │   ├── Schema.php
+│   │   ├── SchemaConnection.php
+│   │   ├── SchemaConnectionInterface.php
+│   │   ├── Table
+│   │   │   ├── Alter.php
+│   │   │   ├── Attributes
+│   │   │   │   ├── Alter
+│   │   │   │   │   ├── Constraint.php
+│   │   │   │   │   └── DataType.php
+│   │   │   │   ├── Constraint.php
+│   │   │   │   └── DataType.php
+│   │   │   ├── Column.php
+│   │   │   ├── Create.php
+│   │   │   ├── Drop.php
+│   │   │   ├── Raw.php
+│   │   │   └── Truncate.php
+│   │   └── Traits
+│   │       └── ConditionTrait.php
+│   ├── Seeder
+│   │   ├── AbstractSeeder.php
+│   │   └── SeederInterface.php
+│   ├── SqliteConnection.php
+│   └── TransactionInterface.php
+├── Environment
+│   └── Env.php
+├── Event
+│   ├── AbstractEvent.php
+│   ├── Dispatcher
+│   │   ├── Dispatcher.php
+│   │   ├── DispatcherAwareInterface.php
+│   │   ├── DispatcherAwareTrait.php
+│   │   └── DispatcherInterface.php
+│   ├── Event.php
+│   ├── EventImmutable.php
+│   ├── EventInterface.php
+│   ├── Exceptions
+│   │   ├── DispatcherNotSetException.php
+│   │   ├── EventImmutableException.php
+│   │   ├── InvalidEventArgumentNameException.php
+│   │   ├── InvalidServiceListenerException.php
+│   │   ├── InvalidServiceMethodException.php
+│   │   ├── ServiceMethodNotFoundException.php
+│   │   └── ServiceNotRegisteredException.php
+│   ├── LazyServiceEventListener.php
+│   ├── ListenersPriorityQueue.php
+│   ├── Priority.php
+│   └── SubscriberInterface.php
+├── Exceptions
+│   ├── ApplicationNotAvailableException.php
+│   ├── Bootstrapper
+│   │   └── HandleExceptions.php
+│   ├── ExceptionHandler.php
+│   └── WhoopsServiceProvider.php
+├── Facade
+│   ├── AbstractFacade.php
+│   ├── Bootstrapper
+│   │   └── FacadeBootstrapper.php
+│   ├── Exceptions
+│   │   └── FacadeObjectNotSetException.php
+│   └── FacadeInterface.php
+├── Filesystem
+│   ├── Adapter
+│   │   ├── Amazon
+│   │   │   ├── AbstractAmazonS3.php
+│   │   │   ├── AsyncAwsS3.php
+│   │   │   └── AwsS3.php
+│   │   ├── FilesystemAdapterInterface.php
+│   │   ├── Ftp
+│   │   │   └── Ftp.php
+│   │   ├── Local
+│   │   │   └── Local.php
+│   │   ├── Memory
+│   │   │   └── InMemory.php
+│   │   └── Sftp
+│   │       └── Sftp.php
+│   ├── Contracts
+│   │   ├── ChecksumCalculatorInterface.php
+│   │   ├── FileFactoryInterface.php
+│   │   ├── ListKeysAwareInterface.php
+│   │   ├── MetadataSupporterInterface.php
+│   │   ├── MimeTypeProviderInterface.php
+│   │   ├── SizeCalculatorInterface.php
+│   │   └── StreamFactoryInterface.php
+│   ├── Exception
+│   │   ├── ExceptionInterface.php
+│   │   ├── FileAlreadyExistsException.php
+│   │   ├── FileNotFoundException.php
+│   │   ├── UnexpectedFileExcption.php
+│   │   └── UnsupportedAdapterException.php
+│   ├── Factory
+│   │   ├── FilesystemFactory.php
+│   │   └── FilesystemFactoryInterface.php
+│   ├── File.php
+│   ├── Filesystem.php
+│   ├── FilesystemInterface.php
+│   ├── FilesystemMap.php
+│   ├── FilesystemMapInterface.php
+│   ├── ServiceProvider
+│   │   └── FilesystemServiceProvider.php
+│   ├── Stream
+│   │   ├── InMemoryBuffer.php
+│   │   ├── Local.php
+│   │   ├── StreamInterface.php
+│   │   ├── StreamMode.php
+│   │   └── StreamWrapper.php
+│   └── Util
+│       ├── Checksum.php
+│       ├── Path.php
+│       └── Size.php
+├── Http
+│   ├── Exceptions
+│   │   ├── FileNotExistsException.php
+│   │   ├── FileNotUploadedException.php
+│   │   ├── FolderNotExistsException.php
+│   │   ├── HttpException.php
+│   │   ├── HttpResponseException.php
+│   │   ├── MultiFileUploadDetectException.php
+│   │   └── StreamedResponseCallableException.php
+│   ├── HeaderCollection.php
+│   ├── Http.php
+│   ├── JsonResponse.php
+│   ├── RedirectResponse.php
+│   ├── Request.php
+│   ├── RequestFactory.php
+│   ├── Response.php
+│   ├── StreamedResponse.php
+│   ├── Upload
+│   │   ├── AbstractUpload.php
+│   │   ├── UploadFile.php
+│   │   └── UploadMultiFile.php
+│   └── Url.php
+├── Logging
+│   ├── AbstractLogger.php
+│   ├── Exception
+│   │   └── LogArgumentException.php
+│   ├── Factory
+│   │   ├── LoggingFactory.php
+│   │   └── LoggingFactoryInterface.php
+│   ├── LogLevel.php
+│   ├── Logger.php
+│   ├── LoggerAwareInterface.php
+│   ├── LoggerAwareTrait.php
+│   ├── LoggerInterface.php
+│   ├── LoggerTrait.php
+│   └── ServiceProvider
+│       └── LoggingServiceProvider.php
+├── Macroable
+│   ├── Exceptions
+│   │   └── MacroNotFoundException.php
+│   └── MacroableTrait.php
+├── Middleware
+│   ├── MaintenanceMiddleware.php
+│   └── ThrottleMiddleware.php
+├── RateLimiter
+│   ├── Policy
+│   │   ├── FixedWindow.php
+│   │   ├── NoLimiter.php
+│   │   └── PolicyInterface.php
+│   ├── RateLimit.php
+│   ├── RateLimiter.php
+│   ├── RateLimiterFactory.php
+│   ├── RateLimiterInterface.php
+│   └── RateLimiterServiceProvider.php
+├── Router
+│   ├── AbstractRouter.php
+│   ├── Exceptions
+│   │   ├── InvalidRouteParameterException.php
+│   │   ├── MissingRouteParameterException.php
+│   │   ├── PatternMismatchException.php
+│   │   ├── RouteNotFoundException.php
+│   │   ├── RouteNotRegisteredException.php
+│   │   ├── RouteUrlNotFullyResolvedException.php
+│   │   └── UnknownRoutePatternException.php
+│   ├── Route.php
+│   ├── RouteDispatcher.php
+│   ├── RouteGroup.php
+│   ├── RouteServiceProvider.php
+│   ├── RouteUrlBuilder.php
+│   ├── Router.php
+│   └── RouterInterface.php
+├── Security
+│   ├── Algo.php
+│   ├── Crypt.php
+│   ├── Exceptions
+│   │   ├── Argon2IdHashingNotSupportedException.php
+│   │   ├── InvalidCipherDefinitionException.php
+│   │   └── SecurityExceptionInterface.php
+│   ├── Facade
+│   │   └── Hash.php
+│   ├── HashServiceProvider.php
+│   ├── Hashing
+│   │   ├── Argon2IdHasher.php
+│   │   ├── ArgonHasher.php
+│   │   ├── BcryptHasher.php
+│   │   ├── DefaultHasher.php
+│   │   ├── HashInterface.php
+│   │   └── HashManager.php
+│   └── helper.php
+├── Support
+│   ├── AppServiceProviderTrait.php
+│   └── helper.php
+├── Template
+│   ├── ConstPool.php
+│   ├── Constant.php
+│   ├── Generate.php
+│   ├── Method.php
+│   ├── MethodPool.php
+│   ├── Property.php
+│   ├── PropertyPool.php
+│   ├── Providers
+│   │   ├── NewConst.php
+│   │   ├── NewMethod.php
+│   │   └── NewProperty.php
+│   └── Traits
+│       ├── CommentTrait.php
+│       └── FormatterTrait.php
+├── Testing
+│   ├── TestCase.php
+│   ├── TestJsonResponse.php
+│   ├── TestResponse.php
+│   └── Traits
+│       └── ResponseStatusTrait.php
+├── Text
+│   ├── Exceptions
+│   │   ├── AbstractTextException.php
+│   │   ├── NoReturnException.php
+│   │   ├── PropertyNotExistException.php
+│   │   └── TextExceptionInterface.php
+│   ├── Regex.php
+│   ├── Str.php
+│   ├── Text.php
+│   └── helper.php
+├── Time
+│   ├── Now.php
+│   ├── Traits
+│   │   └── DateTimeFormatTrait.php
+│   └── helper.php
+└── View
+    ├── AbstractTemplatorParse.php
+    ├── DependencyTemplatorInterface.php
+    ├── Exceptions
+    │   ├── AbstractViewException.php
+    │   ├── DirectiveCanNotBeRegisterException.php
+    │   ├── DirectiveNotRegisterException.php
+    │   ├── ViewExceptionInterface.php
+    │   ├── ViewFileNotFoundException.php
+    │   └── YeldSectionNotFoundException.php
+    ├── Facades
+    │   ├── View.php
+    │   └── Vite.php
+    ├── InteractWithCacheTrait.php
+    ├── Portal.php
+    ├── Templator
+    │   ├── BooleanTemplator.php
+    │   ├── BreakTemplator.php
+    │   ├── CommentTemplator.php
+    │   ├── ComponentTemplator.php
+    │   ├── ContinueTemplator.php
+    │   ├── DirectiveTemplator.php
+    │   ├── EachTemplator.php
+    │   ├── IfTemplator.php
+    │   ├── IncludeTemplator.php
+    │   ├── JsonTemplator.php
+    │   ├── NameTemplator.php
+    │   ├── PHPTemplator.php
+    │   ├── SectionTemplator.php
+    │   ├── SetTemplator.php
+    │   └── UseTemplator.php
+    ├── Templator.php
+    ├── TemplatorFinder.php
+    ├── View.php
+    ├── ViewServiceProvider.php
+    └── Vite.php
