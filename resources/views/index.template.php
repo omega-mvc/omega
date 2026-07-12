@@ -5,7 +5,7 @@
 {% section('content') %}
 <div class="dark:bg-gray-800 text-gray-900 m-auto w-9/12 bg-white dark:text-gray-100">
     <h1 class="text-3xl font-bold dark:text-gray-100" id="title">{{ $say }}</h1>
-    <p class="text-gray-700 dark:text-gray-400" id="time">Omega Framework {{ \Composer\InstalledVersions::getPrettyVersion('omega-mvc/framework') }} (PHP v{{ phpversion() }})</p>
+    <p class="text-gray-700 dark:text-gray-400" id="time">Omega Framework {{ \Composer\InstalledVersions::getPrettyVersion('omega-mvc/omega-framework') }} (PHP v{{ phpversion() }})</p>
 
     <div class="grid grid-flow-row grid-cols-2 gap-4 py-2">
         <div class="p-2 min-h-24 rounded-md shadow-lg bg-gray-200 dark:bg-gray-700 border border-gray-200 dark:border-gray-800 hover:bg-opacity-[.9]">

@@ -20,10 +20,10 @@ return [
             'memory' => [
                 'ttl'        => (int) env('CACHE_SECONDS', '31536000'),
             ],
-            'redis'  => [
-                'ttl'        => (int) env('CACHE_SECONDS', '31536000'),
-                'connection' => env('REDIS_CONNECTION', 'default'),
-            ],
+//            'redis'  => [
+//                'ttl'        => (int) env('CACHE_SECONDS', '31536000'),
+//                'connection' => env('REDIS_CONNECTION', 'default'),
+//            ],
         ],
     ]
 ];
