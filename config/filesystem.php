@@ -3,10 +3,11 @@
 /**
  * Omega Application - config/filesystem configuration file.
  *
- * @link      https://omegamvc.github.io
+ * @link      https://omega-mvc.github.io
  * @author    Adriano Giovannini <agisoftt@gmail.com>
- * @copyright Copyright (c) 2024 - 2025 Adriano Giovannini (https://omegamvc.github.io)
+ * @copyright Copyright (c) 2025 - 2026 Adriano Giovannini (https://omega-mvc.github.io)
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
+ * @version   2.0.0
  */
 
 declare(strict_types=1);
@@ -18,11 +19,12 @@ use function Omega\Application\get_path;
  * Return an array of filesystem configuration parameters.
  *
  * @category  Omega
- * @package   Config
- * @link      https://omegamvc.github.io
+ * @package   app\config
+ * @link      https://omega-mvc.github.io
  * @author    Adriano Giovannini <agisoftt@gmail.com>
- * @copyright Copyright (c) 2024 - 2025 Adriano Giovannini (https://omegamvc.github.io)
+ * @copyright Copyright (c) 2025 - 2026 Adriano Giovannini (https://omega-mvc.github.io)
  * @license   https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
+ * @version   2.0.0
  */
 return [
     /**

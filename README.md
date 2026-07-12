@@ -15,9 +15,9 @@
 # Omega Starter Application
 Welcome to **omega**, a minimal MVC framework designed to streamline your PHP development process. This lightweight framework offers essential features for building web applications while maintaining simplicity and ease of use.
 
-## 🪐 Feature
+## Feature
 - MVC structure
-- Application Container (power with [php-di](https://github.com/PHP-DI/PHP-DI))
+- Application Container 
 - Router Support
 - Models builder
 - Query builder

@@ -1,6 +1,6 @@
 # Environment
 .env
-note/
+note
 
 # Cache
 .php-cs-fixer.cache
