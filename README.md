@@ -6,9 +6,9 @@
 
 <p align="center">
     <a href="https://omega-mvc.github.io">Documentation</a> |
-    <a href="https://github.com/omega-mvc/omega-mvc.github.io/blob/main/README.md#changelog">Changelog</a> |
+    <a href="https://github.com/omega-mvc/omega/blob/main/CHANGELOG.md">Changelog</a> |
     <a href="https://github.com/omega-mvc/omega/blob/main/CONTRIBUTING.md">Contributing</a> |
-    <a href="https://github.com/omega-mvc/omega/blob/main/CODE_OF_CONDUCT.md">Code Of Conduct</a> |
+    <a href="https://github.com/omega-mvc/omega/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a> |
     <a href="https://github.com/omega-mvc/omega/blob/main/LICENSE">License</a>
 </p>
 
