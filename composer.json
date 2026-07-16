@@ -30,7 +30,7 @@
         "ext-posix": "*",
         "ext-readline": "*",
         "ext-simplexml": "*",
-        "omega-mvc/omega-framework": "^1.0.0"
+        "omega-mvc/omega-framework": "^1.0.1"
     },
     "require-dev": {
         "filp/whoops": "^2.18",
