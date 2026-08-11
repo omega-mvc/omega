@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace App\Kernel;
 
-use Omega\Application\Application;
+use Omega\Application\ApplicationInterface;
 use Omega\Container\Exceptions\BindingResolutionException;
 use Omega\Container\Exceptions\EntryNotFoundException;
 use Omega\Http\Http;
@@ -26,7 +26,7 @@ use ReflectionException;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
-use function Omega\Support\view;
+use function Omega\View\view;
 
 /**
  * HTTP kernel with enhanced error handling and routing resolution.
@@ -58,13 +58,13 @@ class HttpKernel extends Http
      * Registers a boot callback to enable detailed error pages
      * when the application is running in debug mode.
      *
-     * @param Application $app Application container instance.
+     * @param ApplicationInterface $app Application container instance.
      * @throws BindingResolutionException Thrown when resolving a binding fails.
      * @throws ContainerExceptionInterface Thrown on general container errors, e.g., service not retrievable.
      * @throws EntryNotFoundException Thrown when no entry exists for the identifier.
      * @throws ReflectionException Thrown when the requested class or interface cannot be reflected.
      */
-    public function __construct(Application $app)
+    public function __construct(ApplicationInterface $app)
     {
         parent::__construct($app);
 

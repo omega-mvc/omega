@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace App\Kernel;
 
-use Omega\Application\Application;
+use Omega\Application\ApplicationInterface;
 use Omega\Console\ConsoleApplication;
 use Omega\Container\Exceptions\BindingResolutionException;
 use Omega\Container\Exceptions\EntryNotFoundException;
@@ -37,13 +37,13 @@ use Whoops\Run;
 class ConsoleKernel extends ConsoleApplication
 {
     /**
-     * @param Application $app
+     * @param ApplicationInterface $app
      * @throws BindingResolutionException Thrown when resolving a binding fails.
      * @throws ContainerExceptionInterface Thrown on general container errors, e.g., service not retrievable.
      * @throws EntryNotFoundException Thrown when no entry exists for the identifier.
      * @throws ReflectionException Thrown when the requested class or interface cannot be reflected.
      */
-    public function __construct(Application $app)
+    public function __construct(ApplicationInterface $app)
     {
         parent::__construct($app);
 
