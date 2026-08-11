@@ -25,6 +25,12 @@ Welcome to **omega**, a minimal MVC framework designed to streamline your PHP de
 - Service Provider and Middleware
 - Templator (template engine)
 
+## Requirements
+- **PHP 8.4+** (compatible with PHP 8.4 and later)
+- Composer
+- Node.js + npm (for frontend assets)
+- A MySQL, MariaDB, PostgreSQL, or SQLite database
+
 ## Quick Start (4 Steps)
 
 ### 1 Create Your Project
@@ -63,7 +69,7 @@ php omega db:create  # Only if database doesn't exist yet
 
 Define your table structure:
 ```php
-// database/migration/<timestamp>_profiles.php
+// database/migrations/<timestamp>_profiles.php
 Schema::table('profiles', function (Create $column) {
     $column('user')->varChar(32);
     $column('real_name')->varChar(100);
@@ -123,11 +129,7 @@ Router::get('/profile', [ProfileController::class, 'index']);
 
 ## 🔥 Pro Move: API with Attributes
 
-Skip the route files entirely. Use attributes for clean, self-documented APIs:
-
-```bash
-php omega make:services Profile
-```
+Skip the route files entirely. Use attributes for clean, self-documented APIs. There is no generator for services: create the class manually (e.g. `app/Services/ProfileServices.php`):
 
 ```php
 // app/Services/ProfileServices.php
@@ -166,9 +168,9 @@ Route::get('/api/v1/profile', [ProfileServices::class, 'index'])
 Ready for production? Cache everything:
 
 ```bash
-php omega-mvc view:cache    # Cache compiled templates
-php omega-mvc config:cache  # Cache configuration
-php omega-mvc route:cache   # Cache all routes
+php omega view:cache    # Cache compiled templates
+php omega config:cache  # Cache configuration
+php omega route:cache   # Cache all routes
 ```
 
 ## Official Documentation
