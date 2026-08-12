@@ -158,7 +158,7 @@ This automatically creates your route with middleware—no extra configuration n
 
 **Equivalent traditional route:**
 ```php
-Route::get('/api/v1/profile', [ProfileServices::class, 'index'])
+Router::get('/api/v1/profile', [ProfileServices::class, 'index'])
     ->name('api.v1.profile')
     ->middleware([AuthMiddleware::class]);
 ```
