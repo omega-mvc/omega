@@ -12,13 +12,10 @@ use Omega\Http\Http;
 
 Env::load(dirname(__DIR__));
 
-try {
-    $app = new Application(dirname(__DIR__));
+$app = new Application(dirname(__DIR__));
 
-    $app->set(Http::class, fn() => new HttpKernel($app));
-    $app->set(ConsoleApplication::class, fn () => new ConsoleKernel($app));
-    $app->set(ExceptionHandler::class, fn () => new ExceptionHandler($app));
+$app->set(Http::class, fn() => new HttpKernel($app));
+$app->set(ConsoleApplication::class, fn () => new ConsoleKernel($app));
+$app->set(ExceptionHandler::class, fn () => new ExceptionHandler($app));
 
-    return $app;
-} catch (Exception $e) {
-}
+return $app;

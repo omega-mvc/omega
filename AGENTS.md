@@ -13,27 +13,34 @@
 3. Concentrate analysis and edits only on files within the authorized scope.
 4. **Filesystem:** Any file write, create, or delete (e.g. in tests) must use **native PHP filesystem functions**, never OS-specific commands (`touch`, `rm`, etc.), because Omega must stay compatible with Windows, Linux, and macOS.
 5. Do not take arbitrary actions or make decisions without discussing them with the user first.
+6. **Missing code vs. missing tests:** When you notice code is missing (e.g. the `src/Omega/Router/Attribute/` folder), never assume its tests are gone too — find and run them. The same applies the other way around: if you notice tests are missing, do not assume the code they covered is also gone; check first.
 
 ## Overview
 - This repo is the **Omega starter application** (`omega-mvc/omega`, PHP ^8.4, PSR-4, GPL-3.0). The framework is a Composer dependency installed at `vendor/omega-mvc/framework/`.
 - Entrypoints: `public/index.php` (web) and the `omega` CLI script; both load `bootstrap/app.php`, which returns the `Omega\Application\Application` container.
 - Config: `config/*.php` files return PHP arrays using the `env()` helper; `.env` is loaded by `Env::load()` in `bootstrap/app.php`.
-- Frontend assets use Vite + Tailwind (`resources/`); build with `npm run build`.
+- Frontend: Vite + Tailwind (`resources/`); requires `npm install`, then `npm run dev` (hot reload) or `npm run build`. Without a `public/build` manifest, the base layout falls back to an inline prebuilt Tailwind block.
 
 ## Commands
 - Dev server: `php omega serve` (default port 8000).
-- Full verification: `composer run check` (runs `lint` + `test`). Auto-fix code style: `composer run fix` (phpcbf, PSR-12 on `app/`).
+- Full verification: `composer run check` (runs `lint` + `test`); auto-fix style: `composer run fix`; format + verify pipeline: `composer run ci`.
+- Lint is phpcs (PSR-12) scoped to `app/`; tests are PHPUnit on `tests/`.
 - Single test file: `vendor/bin/phpunit tests/Unit/BasicTest.php`.
-- List every available command: `php omega list` (framework currently reports version 2.0.0).
-- Available system tools: `rg` (ripgrep) and `tig` are installed and may be used for fast content search and git history browsing.
+- List every available command: `php omega list`.
+
+## Gotchas
+- Version reporting: `php omega list` prints "Omega Framework: 2.0.0" because `config/app.php` reads `APP_VERSION` from `.env` (`.env.example` defaults to 2.0.0), while the installed composer package is `omega-mvc/framework` 1.0.0. Trust `composer show omega-mvc/framework` for the real framework version.
+- Attribute-based routes are supported via `Router::register([Class::class])` (see README "Pro Move"). This was restored in the framework checkout at `vendor/omega-mvc/framework/` (`Router::register()` + the `Router/Attribute/` classes) and those changes are **not committed** there: re-running `composer update` (or reinstalling the framework) would wipe them.
+- Controllers live in `app/Http/Controllers/` (namespace `App\Http\Controllers`); the README tutorial shows `app/Controller/`.
+- `bootstrap/app.php` lets boot exceptions propagate (the old empty `try/catch` was removed), but `public/index.php:28-31` still swallows Http-kernel resolution errors with an empty `catch` — check there first when you get a blank page.
+- PHPUnit runs with `APP_ENV=testing` (set in `phpunit.xml.dist`). Tests extend `Tests\AbstractTestCase` (in `tests/`), which boots the app via `bootstrap/app.php`; `tests/bootstrap.php` only loads the Composer autoloader.
 
 ## CLI / generators
 - Generators: `make:controller`, `make:model`, `make:migration`, `make:view`, `make:middleware`, `make:provider`, `make:seeder`, `make:command`, `make:exception`.
 - Database: `db:create`, `migrate:run|refresh|rollback|status|reset|fresh|init`, `db:seed`, `db:wipe`, `db:show`.
-- Cache/ops: `config:cache|clear`, `route:cache|clear|list`, `view:cache|clear|watch`, `command:map|clear`, `package:discover`, `down`/`up`.
+- Cache/ops: `config:cache|clear`, `route:cache|clear|list`, `view:cache|clear|watch`, `command:map|clear`, `package:discover`, `down`/`up`, `cron:list|run|work`.
 
 ## Architecture notes
-- Routes in `routes/web.php` plus `routes/schedule.php` (cron via `Omega\Cron\Facade\Schedule`). Placeholder syntax is `(:any)`-style; attribute-based routes are registered with `Router::register([SomeClass::class])`.
+- Routes in `routes/web.php` plus `routes/schedule.php` (cron via `Omega\Cron\Facade\Schedule`). Placeholder syntax is `(:any)`-style.
 - Migrations live in `database/migrations/` (plural). Models in `app/Models/` extend the framework `Model` and declare `$tableName` / `$primaryKey`.
-- Views are `*.template.php` files in `resources/views/` using the templator engine (`{% extend %}`, `{% section %}`, `{{ $var }}`); layout in `base/base.template.php`, error pages in `pages/`.
-
+- Views are `*.template.php` files in `resources/views/` using the templator engine: child views use `{% extend %}`, `{% section('name') %}...{% endsection %}`, and `{{ $var }}`; the layout (`base/base.template.php`) renders sections via `{% yield('name') %}` and Vite tags via `{% vite([...]) %}`. Error pages are in `pages/` (400–503).
