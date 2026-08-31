@@ -20,10 +20,16 @@ return [
             'memory' => [
                 'ttl'        => (int) env('CACHE_SECONDS', '31536000'),
             ],
-//            'redis'  => [
-//                'ttl'        => (int) env('CACHE_SECONDS', '31536000'),
-//                'connection' => env('REDIS_CONNECTION', 'default'),
-//            ],
+            'memcached' => [
+                'ttl'        => (int) env('CACHE_SECONDS', '31536000'),
+                'host'       => env('MEMCACHED_HOST', '127.0.0.1'),
+                'port'       => (int) env('MEMCACHED_PORT', '11211'),
+                'prefix'     => env('CACHE_PREFIX', 'omega_'),
+            ],
+            'redis'  => [
+                'ttl'        => (int) env('CACHE_SECONDS', '31536000'),
+                'connection' => env('REDIS_CONNECTION', 'default'),
+            ],
         ],
     ]
 ];
