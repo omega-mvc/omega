@@ -56,6 +56,26 @@ php omega serve
 
 **That's it!** Your app is now running. Let's build something awesome.
 
+## Frontend Assets (Tailwind CSS + Vite)
+
+The UI is compiled with [Tailwind CSS v4](https://tailwindcss.com) through [Vite](https://vitejs.dev).
+The generated folders (`node_modules/`, `public/build/`) and `package-lock.json` are **gitignored**,
+so a fresh clone has no compiled CSS: you must install Node dependencies and build once.
+
+```bash
+npm install        # install dependencies (node_modules is gitignored)
+npm run build      # compile and emit hashed assets to public/build/
+```
+
+For development with hot module replacement instead:
+
+```bash
+npm run dev        # starts the Vite dev server (public/hot is gitignored)
+```
+
+The layout (`resources/views/base/base.template.php`) loads the assets via the `vite` directive,
+falling back gracefully when neither a dev server nor a build manifest is present.
+
 
 ## Building Your First Feature
 

@@ -34,8 +34,8 @@
     },
     "require-dev": {
         "filp/whoops": "^2.18",
+        "pestphp/pest": "^5.1",
         "phpstan/phpstan": "^2.2",
-        "phpunit/phpunit": "^13.0.5",
         "squizlabs/php_codesniffer": "^3.13.4"
     },
     "autoload": {
@@ -50,7 +50,8 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit tests",
+        "test": "vendor/bin/pest",
+        "test:phpunit": "vendor/bin/pest --configuration=phpunit.xml.dist",
         "phpcs": "vendor/bin/phpcs --standard=PSR12 app/",
         "lint": "composer run phpcs",
         "phpcbf": "vendor/bin/phpcbf --standard=PSR12 app/",
@@ -71,7 +72,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true
