@@ -8,11 +8,16 @@ Lightweight PHP 8.4+ MVC framework application (omega-mvc/omega). Uses Composer 
 ### PHP/Composer
 ```bash
 composer install              # Install dependencies
-composer test                 # Run PHPUnit tests
+composer test                 # Run Pest tests (Pest v5 wrapping PHPUnit 13)
 composer lint                 # Run PHP_CodeSniffer (PSR-12) on app/
 composer fix                  # Auto-fix code style issues
 composer check                # lint + test
 composer ci                   # fix + check (full CI pipeline)
+```
+
+### PHPStan (no composer script — run directly)
+```bash
+vendor/bin/phpstan analyse    # Static analysis at level 10 (phpstan.neon.dist)
 ```
 
 ### Frontend (npm)
@@ -51,7 +56,8 @@ resources/              # Views, CSS, JS
 routes/web.php          # Web routes
 routes/schedule.php     # Scheduled tasks
 storage/                # Logs, cache, compiled views
-tests/                  # PHPUnit tests (PSR-4: Tests\)
+tests/                  # Pest tests (PSR-4: Tests\)
+  Feature/              # Feature tests (currently the only test dir)
   AbstractTestCase      # Base test case, boots app via bootstrap/app.php
 vendor/                 # Composer dependencies
   omega-mvc/
@@ -62,10 +68,15 @@ omega                   # CLI entry point (#!/usr/bin/env php)
 ```
 
 ## Testing
-- Framework: PHPUnit 13+ with Omega's TestCase
+- Framework: **Pest v5** (wraps PHPUnit 13) with Omega's TestCase
 - Config: `phpunit.xml.dist` (coverage to `cache/coverage-report/`)
-- Run single test: `vendor/bin/phpunit tests/Unit/SpecificTest.php`
+- Run single test: `vendor/bin/pest tests/Feature/IndexControllerTest.php`
 - Test env: `APP_ENV=testing` (set in phpunit.xml.dist)
+- Tests extend `Tests\AbstractTestCase` which boots the app via `bootstrap/app.php`
+
+## Static Analysis
+- **PHPStan level 10** — config: `phpstan.neon.dist`, analyzes `app/` and `tests/`
+- No composer script; run via `vendor/bin/phpstan analyse`
 
 ## Code Style
 - Standard: PSR-12 with exclusions (see `phpcs.xml.dist`)
@@ -84,8 +95,8 @@ omega                   # CLI entry point (#!/usr/bin/env php)
 - Cache routes for production: `php omega route:cache`
 
 ## Important Notes
-- PHP 8.4+ required (strict types declared everywhere)
+- PHP 8.4+ required (`declare(strict_types=1)` in all files)
 - Framework package: `omega-mvc/framework` (v1.0+)
-- Uses `Omega\Application\Application` container
-- Kernel classes in `app/Kernel/` handle HTTP/Console requests
-- View engine uses `{% %}` syntax (Templator)
+- View engine uses `{% %}` syntax (Templator), not Blade-style `{{ }}`
+- `composer.lock` and `package-lock.json` are gitignored — regenerate on install
+- No CI/CD pipeline yet; `composer ci` is the local verification command
