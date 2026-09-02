@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Tests\AbstractTestCase;
 
+$_ENV['APP_ENV'] = 'testing';
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
