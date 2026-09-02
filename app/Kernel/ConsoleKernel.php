@@ -49,10 +49,10 @@ class ConsoleKernel extends ConsoleApplication
 
         $this->app->bootedCallback(function () {
             if ($this->app->isDebugMode() && class_exists(Run::class)) {
-                /* @var PlainTextHandler $handler */
+                /** @var PlainTextHandler $handler */
                 $handler = $this->app->make('error.PlainTextHandler');
 
-                /* @var Run $run */
+                /** @var Run $run */
                 $run = $this->app->make('error.handle');
                 $run
                     ->pushHandler($handler)

@@ -70,11 +70,11 @@ class HttpKernel extends Http
 
         $this->app->bootedCallback(function () {
             if ($this->app->isDebugMode() && class_exists(Run::class)) {
-                /* @var PrettyPageHandler $hanlder */
+                /** @var PrettyPageHandler $handler */
                 $handler = $this->app->make('error.PrettyPageHandler');
                 $handler->setPageTitle('Omega Framework');
 
-                /* @var Run $run */
+                /** @var Run $run */
                 $run = $this->app->make('error.handle');
                 $run
                     ->pushHandler($handler)
@@ -97,7 +97,7 @@ class HttpKernel extends Http
      * @param Request $request Incoming HTTP request.
      * @return array{
      *     callable: callable,
-     *     parameters: array<string, mixed>,
+     *     parameters: array<int|string, mixed>,
      *     middleware: array<int, class-string|string>
      * } Dispatcher configuration.
      */
@@ -107,7 +107,7 @@ class HttpKernel extends Http
 
         $content = $dispatcher->run(
         // found
-            fn($callable, $param) => $this->app->call($callable, $param),
+            fn (callable $callable, array $param) => $this->app->call($callable, $param),
             // not found
             fn($path) => view('pages/404', [
                 'path'    => $path,

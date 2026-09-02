@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Omega\Application\ApplicationInterface;
 use Omega\Testing\TestCase;
 
 abstract class AbstractTestCase extends TestCase
@@ -12,6 +13,8 @@ abstract class AbstractTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->app = require dirname(__DIR__) . '/bootstrap/app.php';
+        /** @var ApplicationInterface $app */
+        $app = require dirname(__DIR__) . '/bootstrap/app.php';
+        $this->app = $app;
     }
 }

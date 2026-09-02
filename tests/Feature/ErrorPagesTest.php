@@ -7,10 +7,11 @@ afterEach(function (): void {
     restore_exception_handler();
 });
 
-it('renders every HTTP error page template in the pages directory', function (): void {
-    $this->get('/');
+    it('renders every HTTP error page template in the pages directory', function (): void {
+        $this->get('/');
 
-    $render = $this->app->make('view.response');
+        /** @var Closure(string, array): Response $render */
+        $render = $this->app->make('view.response');
 
     $pages = [
         400 => '400 | Bad Request',
