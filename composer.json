@@ -35,6 +35,7 @@
     "require-dev": {
         "filp/whoops": "^2.18",
         "pestphp/pest": "^5.1",
+        "pestphp/pest-plugin-phpstan": "^5.2",
         "phpstan/phpstan": "^2.2",
         "squizlabs/php_codesniffer": "^3.13.4"
     },
