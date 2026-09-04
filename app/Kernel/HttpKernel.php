@@ -107,7 +107,7 @@ class HttpKernel extends Http
 
         $content = $dispatcher->run(
         // found
-            fn (callable $callable, array $param) => $this->app->call($callable, $param),
+            fn (array|callable $callable, array $param) => $this->app->call($callable, $param),
             // not found
             fn($path) => view('pages/404', [
                 'path'    => $path,
