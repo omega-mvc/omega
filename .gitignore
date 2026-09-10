@@ -25,9 +25,6 @@ phpcs.xml
 phpunit.xml
 phpstan.neon
 
-# Visual Studio Code configs
-/.vscode
-
 # JetBrains IDEs
 /.idea
 
@@ -35,4 +32,3 @@ phpstan.neon
 npm-debug.log
 yarn-error.log
 /docs/
-/REFACTORING_NOTES.md

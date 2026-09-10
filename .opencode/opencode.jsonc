@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "*": "allow",
+      "composer*": "ask",
+      "vendor/bin/pest*": "allow",
+      "vendor/bin/phpunit*": "ask",
+      "vendor/bin/phpcs*": "ask",
+      "vendor/bin/phpstan*": "allow",
+      "pest*": "allow",
+      "phpunit*": "ask",
+      "phpcs*": "ask",
+      "phpstan*": "allow"
+    }
+  }
+}

@@ -1,102 +1,64 @@
 # Omega MVC - Agent Instructions
 
-## Project Overview
-Lightweight PHP 8.4+ MVC framework application (omega-mvc/omega). Uses Composer for PHP, npm/Vite for frontend.
+Lightweight PHP 8.4+ MVC (omega-mvc/omega). Composer + npm/Vite. `composer.lock` and `package-lock.json` are gitignored.
 
-## Key Commands
+## Verified Commands
 
-### PHP/Composer
+### PHP
 ```bash
-composer install              # Install dependencies
-composer test                 # Run Pest tests (Pest v5 wrapping PHPUnit 13)
-composer lint                 # Run PHP_CodeSniffer (PSR-12) on app/
-composer fix                  # Auto-fix code style issues
+composer install
+composer test                 # Pest v5
+composer lint                 # phpcs --standard=PSR12 app/
+composer fix                  # phpcbf
 composer check                # lint + test
-composer ci                   # fix + check (full CI pipeline)
+composer ci                   # fix + check
+vendor/bin/phpstan analyse    # level 10, no composer script
 ```
 
-### PHPStan (no composer script — run directly)
-```bash
-vendor/bin/phpstan analyse    # Static analysis at level 10 (phpstan.neon.dist)
-```
+Order when verifying: `lint -> test -> phpstan` (or `composer ci`).
 
-### Frontend (npm)
+### Frontend
 ```bash
-npm install                   # Install frontend deps
-npm run dev                   # Vite dev server
-npm run build                 # Production build
+npm install
+npm run build                 # emits to public/build/ (gitignored)
+npm run dev                  # Vite HMR; public/hot/ gitignored
 ```
+Layout loads assets via `vite` directive (`resources/views/base/base.template.php`).
 
-### CLI Tool (omega)
+### CLI (`omega`)
 ```bash
-php omega serve               # Start dev server
-php omega migrate             # Run migrations
+php omega serve
+php omega migrate
+php omega db:create           # creates DB (README only)
 php omega make:migration <name>
 php omega make:model <name> --table-name <table>
 php omega make:controller <name>
 php omega make:view <name>
-php omega view:cache          # Cache compiled templates
-php omega config:cache        # Cache configuration
-php omega route:cache         # Cache routes
+php omega make:seed <name>     # framework has MakeSeed
+php omega seed                 # framework has Seed command
+php omega view:cache | config:cache | route:cache
+php omega route:list
 ```
 
-## Project Structure
-```
-app/                    # Application code (PSR-4: App\)
-  Http/Controllers/     # Controllers
-  Kernel/               # HttpKernel, ConsoleKernel
-  Middlewares/          # HTTP middlewares
-  Models/               # Eloquent-like models
-  Providers/            # Service providers
-bootstrap/app.php       # Application bootstrap, registers kernels
-config/                 # Configuration files (app, database, cache, etc.)
-database/migrations/    # Migration files
-public/index.php        # HTTP entry point
-resources/              # Views, CSS, JS
-routes/web.php          # Web routes
-routes/schedule.php     # Scheduled tasks
-storage/                # Logs, cache, compiled views
-tests/                  # Pest tests (PSR-4: Tests\)
-  Feature/              # Feature tests (currently the only test dir)
-  AbstractTestCase      # Base test case, boots app via bootstrap/app.php
-vendor/                 # Composer dependencies
-  omega-mvc/
-    framework/          # Core framework (Omega\Application, Router, HTTP, Console, etc.)
-    gettext/            # Translation support
-    serializable-closure/ # Closure serialization
-omega                   # CLI entry point (#!/usr/bin/env php)
-```
+## Structure That Changes Behavior
 
-## Testing
-- Framework: **Pest v5** (wraps PHPUnit 13) with Omega's TestCase
-- Config: `phpunit.xml.dist` (coverage to `cache/coverage-report/`)
-- Run single test: `vendor/bin/pest tests/Feature/IndexControllerTest.php`
-- Test env: `APP_ENV=testing` (set in phpunit.xml.dist)
-- Tests extend `Tests\AbstractTestCase` which boots the app via `bootstrap/app.php`
+- `bootstrap/app.php` boots app; `tests/Feature/` extends `Tests\AbstractTestCase` which boots via it.
+- PSR-4: `App\` -> `app/`, `Tests\` -> `tests/`. `Database\Seeders\` -> `database/seeders/`.
+- Entry points: `public/index.php` (HTTP), `omega` (console).
+- Framework lives in `vendor/omega-mvc/framework/` (not `app/`).
 
-## Static Analysis
-- **PHPStan level 10** — config: `phpstan.neon.dist`, analyzes `app/` and `tests/`
-- No composer script; run via `vendor/bin/phpstan analyse`
+## Testing / Verification
+- Pest v5, config: `phpunit.xml.dist` (`APP_ENV=testing`, coverage -> `cache/coverage-report/`).
+- Single test: `vendor/bin/pest tests/Feature/IndexControllerTest.php`.
 
-## Code Style
-- Standard: PSR-12 with exclusions (see `phpcs.xml.dist`)
-- Line limit: 120 chars
-- Excludes: `PSR1.Methods.CamelCapsMethodName.NotCamelCaps`, `PSR12.Files.FileHeader.IncorrectGrouping`
-- Cache: `cache/phpcs/phpcs.json`
+## Routing & Views
+- Traditional: `Router::get('/path', [Controller::class, 'method'])`.
+- Attribute: `#[Get('/path')]` on method, then `Router::register([Service::class])`.
+- View engine: **Templator** (`{% %}` syntax), not Blade (`{{ }}`).
 
-## Environment
-- Copy `.env.example` → `.env` (auto-done on `composer install`)
-- Required PHP extensions: iconv, mbstring, openssl, pcntl, pdo, posix, readline, simplexml
-- Database: MySQL/MariaDB/PostgreSQL/SQLite
+## Env / Config
+- `.env` copied from `.env.example` automatically by `composer install` (`post-root-package-install`).
+- Required extensions: iconv, mbstring, openssl, pcntl, pdo, posix, readline, simplexml.
 
-## Routing
-- Traditional: `Router::get('/path', [Controller::class, 'method'])`
-- Attribute-based: `#[Get('/path')]` on service methods, then `Router::register([Service::class])`
-- Cache routes for production: `php omega route:cache`
-
-## Important Notes
-- PHP 8.4+ required (`declare(strict_types=1)` in all files)
-- Framework package: `omega-mvc/framework` (v1.0+)
-- View engine uses `{% %}` syntax (Templator), not Blade-style `{{ }}`
-- `composer.lock` and `package-lock.json` are gitignored — regenerate on install
-- No CI/CD pipeline yet; `composer ci` is the local verification command
+## Opencode Permissions (`.opencode/`)
+- `vendor/bin/phpstan*` allowed; `vendor/bin/phpcs*` and `vendor/bin/phpunit*` ask; `composer*` ask.
