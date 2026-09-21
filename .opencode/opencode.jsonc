@@ -1,17 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
+  "formatter": true,
   "permission": {
     "bash": {
-      "*": "allow",
-      "composer*": "ask",
-      "vendor/bin/pest*": "allow",
-      "vendor/bin/phpunit*": "ask",
-      "vendor/bin/phpcs*": "ask",
-      "vendor/bin/phpstan*": "allow",
-      "pest*": "allow",
-      "phpunit*": "ask",
-      "phpcs*": "ask",
-      "phpstan*": "allow"
+      "composer*": "deny",
+      "phpcs*": "deny",
+      "phpstan*": "ask",
+      "pest --coverage*": "deny",
+      "pest --no-coverage*": "allow"
     }
   }
 }

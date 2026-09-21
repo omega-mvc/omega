@@ -90,11 +90,21 @@ php omega db:create  # Only if database doesn't exist yet
 Define your table structure:
 ```php
 // database/migrations/<timestamp>_profiles.php
-Schema::table('profiles', function (Create $column) {
-    $column('user')->varChar(32);
-    $column('real_name')->varChar(100);
-    $column->primaryKey('user');
-})
+use Omega\Database\Facades\Schema;
+use Omega\Database\Schema\Table\Create;
+
+return [
+    'up' => [
+        Schema::table('profiles', function (Create $column) {
+            $column('user')->varChar(32);
+            $column('real_name')->varChar(100);
+            $column->primaryKey('user');
+        }),
+    ],
+    'down' => [
+        Schema::drop()->table('profiles'),
+    ],
+];
 ```
 
 Run the migration:
@@ -114,12 +124,23 @@ php omega make:controller Profile
 
 Add your logic:
 ```php
-// app/Controller/ProfileController.php
-public function handle(MyPDO $pdo): Response
+// app/Http/Controllers/ProfileController.php
+namespace App\Http\Controllers;
+
+use App\Models\Profile;
+use Omega\Database\ConnectionInterface;
+use Omega\Http\Response;
+
+use function Omega\View\view;
+
+class ProfileController extends AbstractController
 {
-    return view('profile', [
-        'name' => Profile::find('omega-mvc', $pdo)->real_name
-    ]);
+    public function handle(ConnectionInterface $pdo): Response
+    {
+        return view('profile', [
+            'name' => Profile::find('omega-mvc', $pdo)->real_name
+        ]);
+    }
 }
 ```
 
@@ -140,8 +161,8 @@ php omega make:view profile
 
 ### Step 5: Register Your Route
 ```php
-// route/web.php
-Router::get('/profile', [ProfileController::class, 'index']);
+// routes/web.php
+Router::get('/profile', [ProfileController::class, 'handle']);
 ```
 
 **Done!** Visit `/profile` and see your work in action.
@@ -153,17 +174,28 @@ Skip the route files entirely. Use attributes for clean, self-documented APIs. T
 
 ```php
 // app/Services/ProfileServices.php
-#[Get('/api/v1/profile')]
-#[Name('api.v1.profile')]
-#[Middleware([AuthMiddleware::class])]
-public function index(MyPDO $pdo): array
-{
-    $data = Cache::remember('profile', 3600, fn () => [
-        'name'   => Profile::find('omega-mvc', $pdo)->real_name,
-        'status' => 200,
-    ]);
+use App\Models\Profile;
+use Omega\Cache\Facade\Cache;
+use Omega\Database\ConnectionInterface;
+use Omega\Http\JsonResponse;
+use Omega\Router\Attribute\Middleware;
+use Omega\Router\Attribute\Name;
+use Omega\Router\Attribute\Route\Get;
 
-    return JsonResponse($data);
+class ProfileServices
+{
+    #[Get('/api/v1/profile')]
+    #[Name('api.v1.profile')]
+    #[Middleware([AuthMiddleware::class])]
+    public function index(ConnectionInterface $pdo): JsonResponse
+    {
+        $data = Cache::remember('profile', fn () => [
+            'name'   => Profile::find('omega-mvc', $pdo)->real_name,
+            'status' => 200,
+        ], 3600);
+
+        return new JsonResponse($data);
+    }
 }
 ```
 then register this route attribute.
