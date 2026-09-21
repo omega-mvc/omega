@@ -16,7 +16,26 @@ The agent's competence is strictly limited to:
 - **omega-mvc/gettext** — gettext implementation
 - **omega-mvc/serializable-closure** — serializable closure implementation; if something needs fixing, fix it freely
 
-## Overview
+## Package Agents and Delegation
+
+The per-package agents live in `.opencode/agents/` and are the experts for
+their own Composer package in `vendor/omega-mvc/`. Delegate to them when a task
+concerns a specific package:
+
+- **`framework`** — `vendor/omega-mvc/framework/` (main library). Its
+  `AGENTS.md` holds deep framework-authoring conventions; the agent reads it
+  before every task.
+- **`gettext`** — `vendor/omega-mvc/gettext/` (GNU gettext localization/i18n).
+- **`serializable-closure`** — `vendor/omega-mvc/serializable-closure/`
+  (closure serialization/storage).
+
+Delegation rule: when the conversation touches a package, delegate to that
+package's agent (subagent) and let it handle the work; the main agent stays
+responsible for the starter app (`omega`) and for integration between the
+pieces. Treated like "if something needs fixing, fix it freely": within its
+package each subagent has license to fix issues directly. Never work on a
+package codebase without consulting its agent first (a thorough-boundary
+guardrail).
 
 Custom PHP 8.4+ MVC framework (`omega-mvc/omega`), NOT Laravel. The framework lives in
 `vendor/omega-mvc/framework/` (its AGENTS.md has deep framework-authoring conventions). That
