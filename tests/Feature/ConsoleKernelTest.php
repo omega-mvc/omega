@@ -11,13 +11,6 @@ use Omega\Facade\Bootstrapper\FacadeBootstrapper;
 use Whoops\Handler\PlainTextHandler;
 use Whoops\Run;
 
-afterEach(function (): void {
-    if ($this->app->bound('error.handle')) {
-        restore_error_handler();
-        restore_exception_handler();
-    }
-});
-
 it('registers the whoops error handler when the app runs in debug mode', function (): void {
     $kernel = $this->app->make(ConsoleApplication::class);
 
@@ -25,8 +18,15 @@ it('registers the whoops error handler when the app runs in debug mode', functio
         ConfigBootstrapper::class,
         FacadeBootstrapper::class,
         RegisterProviders::class,
-        BootProviders::class,
     ]);
+
+    // Set here rather than inherited from APP_DEBUG in the environment, the way the
+    // companion test below sets it to false. WhoopsServiceProvider::boot() binds
+    // "error.handle" only when the application is in debug mode, so a suite run with
+    // APP_DEBUG=false used to fail on a test that is about debug mode.
+    $this->app->set('app.debug', true);
+
+    $this->app->bootProvider();
 
     expect($kernel)->toBeInstanceOf(ConsoleKernel::class);
 

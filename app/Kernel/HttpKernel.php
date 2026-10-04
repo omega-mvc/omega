@@ -109,16 +109,16 @@ class HttpKernel extends Http
         // found
             fn (array|callable $callable, array $param) => $this->app->call($callable, $param),
             // not found
-            fn($path) => view('pages/404', [
-                'path'    => $path,
-                'headers' => ['status' => 404],
-            ]),
+            // The status is the third argument, not a key of the second one. Passing it
+            // inside the data rendered the error page as a normal 200 response and handed
+            // the template a "headers" variable it never asked for.
+            fn($path) => view('pages/404', ['path' => $path], ['status' => 404]),
             // method not allowed
-            fn($path, $method) => view('pages/405', [
-                'path'    => $path,
-                'method'  => $method,
-                'headers' => ['status' => 405],
-            ])
+            fn($path, $method) => view(
+                'pages/405',
+                ['path' => $path, 'method' => $method],
+                ['status' => 405]
+            )
         );
 
         return [

@@ -6,11 +6,6 @@ use Omega\Exceptions\ExceptionHandler;
 use Omega\Http\Exceptions\HttpException;
 use Omega\Http\Request;
 
-afterEach(function (): void {
-    restore_error_handler();
-    restore_exception_handler();
-});
-
 beforeEach(function (): void {
     $this->get('/');
 });
