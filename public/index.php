@@ -1,9 +1,6 @@
 <?php
 
 use Omega\Application\Application;
-use Omega\Container\Exceptions\BindingResolutionException;
-use Omega\Container\Exceptions\CircularAliasException;
-use Omega\Container\Exceptions\EntryNotFoundException;
 use Omega\Http\Http;
 use Omega\Http\RequestFactory;
 
@@ -23,12 +20,15 @@ $app = require_once dirname(__DIR__) . '/bootstrap/app.php';
 /**
  * Declare http kernel.
  *
+ * A kernel that cannot be built is not handled here. Swallowing the failure left
+ * $kernel undefined, so the next line raised "Call to a member function handle()
+ * on null" and the reason the kernel could not be built was gone: unreported,
+ * unlogged, and replaced by a fatal that names the absolute path of the file it
+ * failed in. Letting the failure reach the exception handler keeps the cause.
+ *
  * @var Http $kernel
  */
-try {
-    $kernel = $app->make(Http::class);
-} catch (CircularAliasException|BindingResolutionException|EntryNotFoundException|ReflectionException $e) {
-}
+$kernel = $app->make(Http::class);
 
 
 /**
