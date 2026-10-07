@@ -47,6 +47,11 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
+      - name: Create .env
+        # The app boots from .env; composer only copies .env.example on
+        # create-project, never on install, so CI must do it explicitly.
+        run: cp .env.example .env
+
       - name: Run PHPUnit
         # --no-coverage keeps the job green: the XML declares an HTML report
         # that needs a coverage driver, which CI deliberately does not provide.
