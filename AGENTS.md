@@ -6,6 +6,8 @@
 2. The user is always right; the user's word is the sole source of truth.
 3. When the user gives an order, execute it without arguing.
 4. Modifications made by the user are always to be considered legitimate; never "fix" or "restore" them unprompted.
+5. **Verification discipline:** phpcs and phpstan are BANNED — never run them. Test suites (phpunit/pest) run only ONCE, at the END of the task, never piecemeal during the work. Never launch a suite to "check it still passes" between edits.
+6. Verify claims by reading the real code and citing `file:line`. Never write smoke scripts to confirm your own suspicions — if the code doesn't prove the claim, stop and ask instead of crafting a test that confirms what you already believe.
 
 ## Agent Scope of Competence
 
@@ -47,7 +49,7 @@ installed package ships its own full test suite (~680 test files under
 
 ```bash
 composer install           # post-root-package-install copies .env from .env.example
-composer test              # Pest v5 (phpunit.xml.dist)
+composer test              # PHPUnit 13 (phpunit.xml.dist)
 composer lint              # phpcs --standard=PSR12 app/  (tests are NOT linted)
 composer fix               # phpcbf
 composer check             # lint + test
@@ -58,7 +60,7 @@ npm run build              # emits hashed assets to public/build/ (gitignored)
 ```
 
 Verify in order: `lint -> test -> phpstan` (or `composer ci`). Single test:
-`vendor/bin/pest tests/Feature/IndexControllerTest.php`
+`vendor/bin/phpunit tests/Tests/App/IndexControllerTest.php`
 
 ## CLI (`php omega <cmd>`)
 
@@ -69,13 +71,13 @@ Verify in order: `lint -> test -> phpstan` (or `composer ci`). Single test:
 ## Structure / Conventions
 
 - Entry points: `public/index.php` (HTTP), `omega` (console). Both load `vendor/autoload.php` + `bootstrap/app.php`, which builds the container and registers `App\Kernel\HttpKernel` / `ConsoleKernel`.
-- PSR-4: `App\` → `app/`, `Tests\` → `tests/`, `Database\Seeders\` → `database/seeders/`.
+- PSR-4: `App\` → `app/`, `Tests\` → `tests/Tests` (so app tests are `Tests\App\*` in `tests/Tests/App`), `Database\Seeders\` → `database/seeders/`. Non-class test files (bootstrap) stay at `tests/` root without a namespace, as in the framework packages.
 - Views: **Templator** engine, files end `.template.php` under `resources/views/`. Syntax is `{% ... %}` (extend/section/yield/vite), NOT Blade. `{{ $var }}` is PHP echo, not a template tag.
 - Routing: `routes/web.php` via `Router::get(...)`; API-style uses method attributes (`#[Get]`, `#[Middleware]`) on a services class registered with `Router::register([...])`. `routes/schedule.php` = cron.
 - Framework namespaces are `Omega\*`; app code is `App\*`. Routing/attributes/middleware come from the installed package, not this repo.
-- Controllers type-hint dependencies and expose a `handle()` method; tests boot the app via `tests/AbstractTestCase` -> `bootstrap/app.php`.
+- Controllers type-hint dependencies and expose a `handle()` method. Test classes extend `Omega\Testing\TestCase` and boot the app in their own `setUp()` via `bootstrap/app.php` — there is no shared abstract test case. `tests/Tests/App/EntryPointTest.php` is the exception: it extends `PHPUnit\Framework\TestCase` because it drives `public/index.php` in a child process and never touches the container.
 
 ## Testing
 
-- App suites (Pest v5, `App\Tests` -> `tests/`): `APP_ENV=testing` set in `phpunit.xml.dist` and `tests/Pest.php`; phpstan config is level 10. Current `tests/Feature` files need no database.
+- App suites (PHPUnit 13, `Tests\App\*` -> `tests/Tests/App/`): `APP_ENV=testing` set in `phpunit.xml.dist`; phpstan config is level 10. There is no `tests/Pest.php` and no Pest dependency. Current `tests/Tests/App` files need no database.
 - Framework suite (`vendor/omega-mvc/framework/tests/`): run from that directory (`vendor/bin/pest` inside the package). `tests/Unit/Database/RealDatabase/` runs every DB test once per engine via the `ManagesDatabase` trait (`engineProvider()` data set: mysql, mariadb, pgsql, sqlite); an engine that is not installed or unreachable **skips** rather than failing. Connection settings come from `ManagesDatabase::getConfiguration()` — overridable via `OMEGA_TEST_DB_HOST|USERNAME|PASSWORD|PORT` env (defaults: 127.0.0.1, root, `vb65ty4`, 3306; pgsql port 5432). Databases: `testing_db`, `testing_db_mariadb`, `testing_db_pgsql`, sqlite `:memory:`.
