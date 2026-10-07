@@ -56,11 +56,11 @@
         <dl class="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-6 sm:grid-cols-4">
             <div class="text-center">
                 <dt class="text-sm text-gray-400">Subpackages</dt>
-                <dd class="text-3xl font-bold text-white">28</dd>
+                <dd class="text-3xl font-bold text-white">31</dd>
             </div>
             <div class="text-center">
                 <dt class="text-sm text-gray-400">Test files</dt>
-                <dd class="text-3xl font-bold text-white">342+</dd>
+                <dd class="text-3xl font-bold text-white">542+</dd>
             </div>
             <div class="text-center">
                 <dt class="text-sm text-gray-400">Required PHP</dt>
