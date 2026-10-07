@@ -32,4 +32,7 @@ phpstan.neon
 # Logs
 npm-debug.log
 yarn-error.log
-/docs/
+
+# Local-only (for now)
+audit-omega-2026-10-03.md
+.github/

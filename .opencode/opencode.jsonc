@@ -4,11 +4,11 @@
   "formatter": true,
   "permission": {
     "bash": {
-      "composer*": "deny",
-      "phpcs*": "deny",
-      "phpstan*": "ask",
-      "pest --coverage*": "deny",
-      "pest --no-coverage*": "allow"
+      "composer*": "allow",
+      "phpcs*": "allow",
+      "phpstan*": "allow",
+      "phpunit --coverage*": "deny",
+      "phpunit": "allow"
     }
   }
 }

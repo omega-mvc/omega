@@ -12,6 +12,14 @@
     <a href="https://github.com/omega-mvc/omega/blob/main/LICENSE">License</a>
 </p>
 
+<p align="center">
+    <a href="https://github.com/omega-mvc/omega/actions/workflows/tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/omega-mvc/omega/tests.yml?label=PHPUnit" alt="PHPUnit"></a>
+    <a href="https://github.com/omega-mvc/omega/actions/workflows/coding-standard.yml"><img src="https://img.shields.io/github/actions/workflow/status/omega-mvc/omega/coding-standard.yml?label=PHPCS" alt="PHPCS"></a>
+    <a href="https://github.com/omega-mvc/omega/actions/workflows/static-analysis.yml"><img src="https://img.shields.io/github/actions/workflow/status/omega-mvc/omega/static-analysis.yml?label=PHPStan" alt="PHPStan"></a>
+    <a href="https://packagist.org/packages/omega-mvc/omega"><img src="https://img.shields.io/packagist/v/omega-mvc/omega.svg" alt="Packagist Version"></a>
+    <a href="https://semver.org"><img src="https://img.shields.io/badge/semver-1.0.0-brightgreen" alt="SemVer 1.0.0"></a>
+</p>
+
 # Omega Starter Application
 Welcome to **omega**, a minimal MVC framework designed to streamline your PHP development process. This lightweight framework offers essential features for building web applications while maintaining simplicity and ease of use.
 

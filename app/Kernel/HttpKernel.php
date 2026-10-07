@@ -107,14 +107,34 @@ class HttpKernel extends Http
 
         $content = $dispatcher->run(
         // found
-            fn (array|callable $callable, array $param) => $this->app->call($callable, $param),
+            function (callable|array|object|string $callable, array $param) {
+                /**
+                 * RouteDispatcher hands over the matched route handler and its
+                 * parameters, so $callable is whatever call() accepts: a native
+                 * callable, an invokable object, a [class, method] pair or a
+                 * "Class@method" string.
+                 *
+                 * The narrowing is asserted here, not on the parameter, for two
+                 * reasons. Array shapes cannot be written as a native PHP type,
+                 * and ContainerInterface::call() documents a narrower shape than
+                 * its own native signature (callable|object|array|string), so a
+                 * plain array is rejected statically while working at runtime.
+                 * The interface is load-bearing for the whole framework and is
+                 * deliberately left untouched; this states the contract the
+                 * dispatcher already honours instead of changing it.
+                 *
+                 * @var callable|object|array{0: object|string, 1: string}|string $callable
+                 * @var array<int|string, mixed> $param
+                 */
+                return $this->app->call($callable, $param);
+            },
             // not found
             // The status is the third argument, not a key of the second one. Passing it
             // inside the data rendered the error page as a normal 200 response and handed
             // the template a "headers" variable it never asked for.
-            fn($path) => view('pages/404', ['path' => $path], ['status' => 404]),
+            fn(string $path) => view('pages/404', ['path' => $path], ['status' => 404]),
             // method not allowed
-            fn($path, $method) => view(
+            fn(string $path, string $method) => view(
                 'pages/405',
                 ['path' => $path, 'method' => $method],
                 ['status' => 405]
